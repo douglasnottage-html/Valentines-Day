@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine?</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #ffe6e6;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    h1 {
+        color: #e6005c;
+        font-size: 48px;
+        margin-bottom: 20px;
+        z-index: 1;
+        position: relative;
+    }
+
+    p {
+        color: #ff1a75;
+        font-size: 24px;
+        margin-bottom: 40px;
+    }
+
+    .heart {
+        width: 100px;
+        height: 100px;
+        background-color: #ff1a75;
+        position: relative;
+        transform: rotate(-45deg);
+        animation: pulse 1s infinite;
+        margin: 60px 0 20px 0;
+        z-index: 0;
+    }
+
+    .heart::before,
+    .heart::after {
+        content: "";
+        width: 100px;
+        height: 100px;
+        background-color: #ff1a75;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .heart::before {
+        top: -50px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: 50px;
+        top: 0;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1) rotate(-45deg); }
+        50% { transform: scale(1.2) rotate(-45deg); }
+        100% { transform: scale(1) rotate(-45deg); }
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 20px;
+        background-color: #ff1a75;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 10px;
+        transition: transform 0.2s, background-color 0.2s;
+        position: relative;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+        background-color: #e6005c;
+    }
+
+    #yesBtn {
+        transform: scale(1); /* initial scale */
+    }
+</style>
+</head>
+<body>
+    <h1>Will you be my Valentine? ❤️</h1>
+    <div class="heart"></div>
+    <p>Click your answer:</p>
+    <div>
+        <button id="yesBtn" onclick="yesMessage()">Yes, of course! 💖</button>
+        <button id="noBtn">No 😢</button>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        let yesScale = 1; // start at normal size
+
+        // Make the "No" button jump away
+        noBtn.addEventListener('mouseover', () => {
+            // Move No button
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+
+            // Permanently grow Yes button
+            yesScale += 0.25; // increase 25% each time
+            yesBtn.style.transform = `scale(${yesScale})`;
+        });
+
+        function yesMessage() {
+            alert("Yay! I'm so happy! ❤️💖💘");
+        }
+    </script>
+</body>
+</html>
